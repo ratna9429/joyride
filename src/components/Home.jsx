@@ -5,6 +5,19 @@ import Tour from "./Tour"; // assuming Tour component is in a separate file
 const Home = () => {
   const [isTourOpen, setIsTourOpen] = useState(true);
 
+  const steps = [
+    {
+      title: "Step 1",
+      content: "This is the first step.",
+      target: "#step-1", // CSS selector for the targeted component
+    },
+    {
+      title: "Step 2",
+      content: "This is the second step.",
+      target: "#step-2", // CSS selector for the targeted component
+    },
+  ];
+
   const closeTour = () => {
     setIsTourOpen(false);
   };
@@ -14,14 +27,11 @@ const Home = () => {
       Home
       <br />
       <Link to="/about">
-        <button onClick={() => setIsTourOpen(true)}>Go to About</button>
+        <button onClick={() => setIsTourOpen(true)} id="step-1">
+          Go to About
+        </button>
       </Link>
-      {isTourOpen && (
-        <Tour
-          message="Click on this button to go to About Page."
-          onClose={closeTour}
-        />
-      )}
+      {isTourOpen && <Tour steps={steps} onClose={closeTour} />}
     </div>
   );
 };
