@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import "./tour.css";
 
 const Tour = ({ steps, onClose }) => {
-  const [currentStep, setCurrentStep] = useState(0);
+  const [currentStep, setCurrentStep] = React.useState(0);
+  const step = steps[currentStep];
+
+  useEffect(() => {
+    // Handle step changes or other side effects here
+  }, [currentStep, steps]);
 
   const nextStep = () => {
     if (currentStep < steps.length - 1) {
@@ -16,21 +21,16 @@ const Tour = ({ steps, onClose }) => {
     }
   };
 
-  const skipTour = () => {
-    onClose();
-  };
-
-  const step = steps[currentStep];
-
   return (
     <div className="tour-overlay">
-      <div className="tour-box">
+      <div className="blurred-overlay"></div>
+      <div className="tour-box" style={{ top: step.y, left: step.x }}>
         <div className="tour-content">
           <h2>{step.title}</h2>
           <p>{step.content}</p>
         </div>
         <div className="tour-navigation">
-          <button onClick={skipTour}>SKIP</button>
+          <button onClick={onClose}>SKIP</button>
           <button onClick={prevStep} disabled={currentStep === 0}>
             BACK
           </button>
@@ -41,7 +41,6 @@ const Tour = ({ steps, onClose }) => {
             NEXT
           </button>
         </div>
-        <div className="tour-arrow"></div>
         <button className="tour-close" onClick={onClose}>
           &#10006;
         </button>

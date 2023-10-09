@@ -10,11 +10,8 @@ const Home = () => {
       title: "Step 1",
       content: "This is the first step.",
       target: "#step-1", // CSS selector for the targeted component
-    },
-    {
-      title: "Step 2",
-      content: "This is the second step.",
-      target: "#step-2", // CSS selector for the targeted component
+      x: -550, // X position for the tour box
+      y: -150,
     },
   ];
 
